@@ -14,9 +14,7 @@ const MyPosts = (props) => {
     const newPostElement = React.createRef();
 
     const  addPostHandler = () => {
-        let text = newPostElement.current.value
-        props.addPost(text)
-        newPostElement.current.value = ''
+        props.addPost()
     }
 
     const onPostHandler = () => {
