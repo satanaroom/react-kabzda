@@ -1,7 +1,4 @@
 let store = {
-    _notifySubscriber() {
-        console.log('State changed')
-    },
     _state: {
         profilePage: {
             posts: [
@@ -26,25 +23,31 @@ let store = {
             ]
         }
     },
+    _notifySubscriber() {
+        console.log('State changed')
+    },
+
     getState() {
         return this._state
     },
-    addPost() {
-        let newPost = {
-            id: 5,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0
-        }
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._notifySubscriber(this._state)
-    },
-    updatePostText(newText) {
-        this._state.profilePage.newPostText = newText
-        this._notifySubscriber(this._state)
-    },
     subscribe (observer) {
         this._notifySubscriber = observer //Паттерн "Наблюдатель"
+    },
+
+    dispatch(action) {
+        if (action.type === 'ADD-POST') {
+            let newPost = {
+                id: 5,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0
+            }
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._notifySubscriber(this._state)
+        } else if (action.type === 'UPDATE-POST-TEXT') {
+            this._state.profilePage.newPostText = action.newText
+            this._notifySubscriber(this._state)
+        }
     }
 }
 export default store
