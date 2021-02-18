@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST'
 const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
+const SEND_MESSAGE = 'SEND-MESSAGE'
 
 let store = {
     _state: {
@@ -23,7 +25,8 @@ let store = {
                 {id: 1, message: 'Hi'},
                 {id: 2, message: 'Yo'},
                 {id: 3, message: 'Kek'}
-            ]
+            ],
+            newMessageBody: ''
         }
     },
     _notifySubscriber() {
@@ -38,7 +41,7 @@ let store = {
     },
 
     dispatch(action) {
-        if (action.type === 'ADD-POST') {
+        if (action.type === ADD_POST) {
             let newPost = {
                 id: 5,
                 message: this._state.profilePage.newPostText,
@@ -47,15 +50,26 @@ let store = {
             this._state.profilePage.posts.push(newPost)
             this._state.profilePage.newPostText = ''
             this._notifySubscriber(this._state)
-        } else if (action.type === 'UPDATE-POST-TEXT') {
+        } else if (action.type === UPDATE_POST_TEXT) {
             this._state.profilePage.newPostText = action.newText
+            this._notifySubscriber(this._state)
+        } else if (action.type === UPDATE_NEW_MESSAGE_BODY) {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._notifySubscriber(this._state)
+        } else if (action.type === SEND_MESSAGE) {
+            let body = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.newMessageBody = ''
+            this._state.dialogsPage.messages.push({id: 4, message: body})
             this._notifySubscriber(this._state)
         }
     }
 }
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const updatePostTextActionCreator = (text) =>
+export const addPostCreator = () => ({type: ADD_POST})
+export const updatePostTextCreator = (text) =>
     ({type: UPDATE_POST_TEXT, newText: text })
+export const updateNewMessageBodyCreator = (body) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body })
+export const sendMessageTextCreator = () =>
+    ({type: SEND_MESSAGE})
 
 export default store
 window.store = store
