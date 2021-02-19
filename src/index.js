@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import {BrowserRouter} from "react-router-dom"
-import store from './redux/state'
+import store from './redux/store'
 
 const rerenderEntireTree = (state) => {
     ReactDOM.render(
         <BrowserRouter>
             <App
-                state={store.getState()}
+                state={state}
                 dispatch={store.dispatch.bind(store)}
                 store={store}
             />
@@ -19,5 +19,10 @@ const rerenderEntireTree = (state) => {
 }
 rerenderEntireTree(store.getState())
 
-store.subscribe(rerenderEntireTree)
+
+//Реализация на 42 уроке (у меня работает если передать аттрибут state={store.getState()})
+store.subscribe(() => {
+    let state = store.getState()
+    rerenderEntireTree(state)
+})
 
