@@ -1,26 +1,19 @@
 import React from "react";
 import Post from "./Post/Post";
 import s from "./MyPosts.module.css";
-import {addPostCreator, updatePostTextCreator} from "../../../redux/profile-reducer"
 
 const MyPosts = (props) => {
-
-    // let posts = [
-    //     {id: 1, message: 'Hi, how are you?', likesCount: '10'},
-    //     {id: 2, message: 'It\'s my first post', likesCount: '23'}
-    // ];
-
     const postsElements = props.posts.map(p => <Post message={p.message} like={p.likesCount} id={p.id}/>)
 
     const newPostElement = React.createRef();
 
     const  addPostHandler = () => {
-        props.dispatch(addPostCreator())
+        props.addPost()
     }
 
     const onPostHandler = () => {
         let text = newPostElement.current.value
-        props.dispatch(updatePostTextCreator(text))
+        props.updatePostText(text)
     }
 
     return (
