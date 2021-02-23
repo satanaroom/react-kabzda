@@ -3,6 +3,8 @@ import {addPostCreator, updatePostTextCreator} from "../../../redux/profile-redu
 import MyPosts from "./MyPosts";
 
 const MyPostsContainer = (props) => {
+    let state = props.store.getState()
+
     const addPostHandler = () => {
         props.store.dispatch(addPostCreator())
     }
@@ -16,7 +18,8 @@ const MyPostsContainer = (props) => {
         <MyPosts
             updatePostText={onPostHandler}
             addPost={addPostHandler}
-            posts={props.posts}
+            posts={state.profilePage.posts}
+            newPostText={state.profilePage.newPostText}
         />
     )
 }
