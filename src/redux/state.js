@@ -1,5 +1,4 @@
 import profileReducer from "./profile-reducer";
-import {act} from "@testing-library/react";
 import dialogsReducer from "./dialogs-reducer";
 import sidebarReducer from "./sidebar-reducer";
 
