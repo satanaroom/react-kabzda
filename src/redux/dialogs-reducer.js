@@ -19,15 +19,24 @@ let initialState = {
 }
 
 const dialogsReducer = (state = initialState, action) => {
+    // let stateCopy можно не создавать переменную,
+    // а сразу возвращать её
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_BODY:
-            state.newMessageBody = action.body
-            return state
-        case SEND_MESSAGE:
+            return {
+                ...state,
+                newMessageBody: action.body
+            }
+        case SEND_MESSAGE: {
             let body = state.newMessageBody
-            state.newMessageBody = ''
-            state.messages.push({id: 4, message: body})
-            return state
+            return {
+                ...state,
+                newMessageBody: '',
+                // Создаем новый массив, слева закидываем все эл-ты из старого масссива,
+                // а справа - дописываем еще один элемент (без push)
+                messages: [...state.messages, {id: 4, message: body}]
+            }
+        }
         default:
             return state
     }

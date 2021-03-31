@@ -6,21 +6,13 @@ import {BrowserRouter} from "react-router-dom"
 import store from './redux/store'
 import {Provider} from "react-redux";
 
+ReactDOM.render(
+    <BrowserRouter>
+        <Provider store={store}>
+            <App/>
+        </Provider>
+    </BrowserRouter>,
+    document.getElementById('root')
+)
 
-const rerenderEntireTree = () => {
-    ReactDOM.render(
-        <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
-        </BrowserRouter>,
-        document.getElementById('root')
-    )
-}
-rerenderEntireTree()
-
-//Реализация на 42 уроке (у меня работает если передать аттрибут state={store.getState()})
-store.subscribe(() => {
-    rerenderEntireTree()
-})
 
