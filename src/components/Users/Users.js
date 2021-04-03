@@ -4,17 +4,27 @@ import axios from "axios";
 import userImage from '../../assets/img/userImage.png'
 
 class Users extends React.Component {
-    constructor(props) {
-        super(props)
-
+    componentDidMount() {
         axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
             this.props.setUsers(response.data.items)
         })
-
     }
-    //Пропы в рендер не приходят!
+
+    //Пропсы в рендер не приходят!
     render() {
+        const pagesCount = this.props.totalUsersCount / this.props.pageSize
+
+        const pages = []
+        for (let i=1; i <= pagesCount; i++) {
+            pages.push(i)
+        }
+
         return <div>
+            <div>
+                {pages.map(p => {
+                    <span className={true && s.selectedPage}>{p}</span>
+                })}
+            </div>
             {
                 this.props.users.map(u => <div key={u.id}>
                     <div>
