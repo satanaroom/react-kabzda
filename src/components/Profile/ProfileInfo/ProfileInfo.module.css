@@ -9,3 +9,9 @@
 .descriptionBlock {
     padding: 10px;
 }
+
+.contactsContainer {
+    list-style-type: none;
+    cursor: pointer;
+    margin-top: 0;
+}
