@@ -1,3 +1,12 @@
+.usersPage {
+    max-width: 1200px;
+}
+
+.pages {
+    max-width: 400px;
+    overflow: auto;
+}
+
 .avatar {
     width: 150px;
     height: 150px;
