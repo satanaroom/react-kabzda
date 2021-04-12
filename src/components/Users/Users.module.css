@@ -1,5 +1,7 @@
-.usersPage {
-    max-width: 1200px;
+.selectedPage {
+    margin: 5px;
+    color: red;
+    cursor: pointer;
 }
 
 .pages {
@@ -11,9 +13,8 @@
     width: 150px;
     height: 150px;
 }
-
-.selectedPage {
-    margin: 5px;
-    color: red;
-    cursor: pointer;
+.usersPage {
+    max-width: 1200px;
 }
+
+
