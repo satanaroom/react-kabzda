@@ -1,15 +1,17 @@
 import React from "react";
 import s from './ProfileInfo.module.css';
+import ProfileStatus from './ProfileStatus'
 
 const ProfileInfo = (props) => {
     return (
         <div>
-            <div>
-                <img className={s.image} src={'https://anband.spb.ru/images/100/DSC100111047.jpg'} alt={'background'}/>
-            </div>
+            {/*<div>*/}
+            {/*    <img className={s.image} src={'https://anband.spb.ru/images/100/DSC100111047.jpg'} alt={'background'}/>*/}
+            {/*</div>*/}
+
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt={'Photos: large users photo'}/>
-                <div> Status: {props.profile.aboutMe} </div>
+                <ProfileStatus status={props.profile.aboutMe}/>
                 <div> My contacts:
                     <ul className={s.contactsContainer}>
                         <li>{props.profile.contacts.facebook}</li>
