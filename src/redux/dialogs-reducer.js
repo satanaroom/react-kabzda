@@ -1,4 +1,3 @@
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE-NEW-MESSAGE-BODY'
 const SEND_MESSAGE = 'SEND-MESSAGE'
 
 let initialState = {
@@ -14,26 +13,15 @@ let initialState = {
         {id: 1, message: 'Hi'},
         {id: 2, message: 'Yo'},
         {id: 3, message: 'Kek'}
-    ],
-    newMessageBody: ''
+    ]
 }
 
 const dialogsReducer = (state = initialState, action) => {
-    // let stateCopy можно не создавать переменную,
-    // а сразу возвращать её
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {
-                ...state,
-                newMessageBody: action.body
-            }
         case SEND_MESSAGE: {
-            let body = state.newMessageBody
+            let body = action.newMessageBody
             return {
                 ...state,
-                newMessageBody: '',
-                // Создаем новый массив, слева закидываем все эл-ты из старого масссива,
-                // а справа - дописываем еще один элемент (без push)
                 messages: [...state.messages, {id: 4, message: body}]
             }
         }
@@ -42,8 +30,6 @@ const dialogsReducer = (state = initialState, action) => {
     }
 }
 
-export const updateNewMessageBodyCreator = (body) => ({type: UPDATE_NEW_MESSAGE_BODY, body: body })
-export const sendMessageTextCreator = () =>
-    ({type: SEND_MESSAGE})
+export const sendMessageTextCreator = (newMessageBody) => ({type: SEND_MESSAGE, newMessageBody})
 
 export default dialogsReducer
