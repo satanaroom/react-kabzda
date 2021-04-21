@@ -2,6 +2,7 @@ import React from "react";
 import s from './ProfileInfo.module.css';
 import ProfileStatus from './ProfileStatus'
 import Preloader from "../../common/Preloader/Preloader";
+import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
     if (!props.profile) {
@@ -12,7 +13,7 @@ const ProfileInfo = (props) => {
         <div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large} alt={'Photos: large users photo'}/>
-                <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
+                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus} />
                 <div> My contacts:
                     <ul className={s.contactsContainer}>
                         <li>{props.profile.contacts.facebook}</li>
