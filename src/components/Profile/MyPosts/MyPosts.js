@@ -7,8 +7,20 @@ import {Textarea} from "../../common/FormsControls/FormsControls";
 
 const maxLength15 = maxLengthCreator(15)
 
-const MyPosts = (props) => {
-    const postsElements = props.posts.map(p => <Post message={p.message} like={p.likesCount} key={p.id} id={p.id}/>)
+const MyPosts= React.memo(props => {
+    // Вместо PureComponent можно использовать Memo, отходя от классов
+    // class MyPosts extends PureComponent {
+    // shouldComponentUpdate(nextProps, nextState, nextContext) {
+    //     return nextProps !== this.props || nextState !== this.state
+    // }
+
+    //Пример как можно перевернуть массив,
+    //работая только с его копией
+    const postsElements =
+        [...props.posts]
+            .reverse()
+            .map(p => <Post message={p.message} like={p.likesCount} key={p.id}
+                                                     id={p.id}/>)
 
     const addNewPost = (values) => {
         props.addPost(values.newPostElement)
@@ -23,7 +35,7 @@ const MyPosts = (props) => {
             </div>
         </div>
     )
-}
+})
 
 const AddPostForm = (props) => {
     return (
