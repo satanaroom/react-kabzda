@@ -2,26 +2,18 @@ import s from "./Users.module.css";
 import userImage from "../../assets/img/userImage.png";
 import React from "react";
 import {NavLink} from "react-router-dom";
+import Paginator from "../common/Paginator/Paginator";
 
 let Users = (props) => {
-    const pagesCount = Math.ceil(props.totalUsersCount / props.pageSize)
-
-    const pages = []
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
-
     return <div className={s.usersPage}>
-        <div className={s.pages}>
-            {pages.map(p => {
-                return <span
-                    className={props.currentPage === p && s.selectedPage}
-                    onClick={() => {
-                        props.onPageChanged(p)
-                    }}
-                >{p}</span>
-            })}
-        </div>
+        <Paginator
+            totalItemsCount={props.totalUsersCount}
+            pageSize={props.pageSize}
+            currentPage={props.currentPage}
+            onPageChanged={props.onPageChanged}
+            portionSize={20}
+        />
+
         {
             props.users.map(u => <div key={u.id}>
                 <div>
@@ -35,9 +27,13 @@ let Users = (props) => {
                     <div>
                         {u.followed
                             ? <button disabled={props.followingInProgress.some(id => id === u.id)}
-                                      onClick={() => {props.unfollow(u.id)}}>unfollow</button>
+                                      onClick={() => {
+                                          props.unfollow(u.id)
+                                      }}>unfollow</button>
                             : <button disabled={props.followingInProgress.some(id => id === u.id)}
-                                      onClick={() => {props.follow(u.id)}}>follow</button>}
+                                      onClick={() => {
+                                          props.follow(u.id)
+                                      }}>follow</button>}
                     </div>
                 </div>
                 <div>
