@@ -7,5 +7,6 @@
 }
 
 .pageNumber.selectedPage {
+    color: blueviolet;
     font-weight: bold;
 }
