@@ -5,8 +5,8 @@ const ProfileStatusWithHooks = (props) => {
     let [status, setStatus] = useState(props.status)
 
     useEffect(() => {
-        setStatus(props.status)
-    }, [props.status])
+        setStatus(props.status) // Будем устанавливать статус в стейт, только если он поменялся
+    }, [props.status]) // Массив зависимостей
 
     const activateEditMode = () => {
         setEditMode(true)

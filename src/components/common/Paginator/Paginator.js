@@ -16,6 +16,10 @@ const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, porti
     let rightPortionPageNumber = portionNumber * portionSize
 
     return (
+        // Варианты как добавить несколько css классов
+        // 1. {s.someClass + ' ' + s.someAnotherClass}
+        // 2. {`${someClass} ${s.someAnotherClass}`}
+        // 3. cn (s.someClass, s.someAnotherClass) <- подключается через import cn from 'classnames'
         <div className={s.paginator}>
             {
                 portionNumber > 1
